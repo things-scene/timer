@@ -48,7 +48,7 @@ export default class Timer extends ValueHolder(RectPath(Shape)) {
   }
 
   dispose() {
-    clearTimeout(this.timer)
+    clearTimeout(this.timer);
     super.dispose();
   }
 
@@ -63,9 +63,17 @@ export default class Timer extends ValueHolder(RectPath(Shape)) {
       minutes || 0,
       seconds || 0
     );
-    this.set('data', this.counts * 1000)
+    this.set("data", this.counts * 1000);
 
-    this.counting()
+    this.counting();
+  }
+
+  onchange(after) {
+    if ("value" in after) {
+      this.stopCounting();
+      this.counts = Number(after.value) || 0;
+      this.counting();
+    }
   }
 
   calcToSeconds(days, hours, minutes, seconds) {
@@ -73,11 +81,16 @@ export default class Timer extends ValueHolder(RectPath(Shape)) {
   }
 
   counting() {
+    this.stopCounting()
     this.timer = setTimeout(() => {
       this.counts--;
-      this.set('data', this.counts * 1000)
+      this.set("data", this.counts * 1000);
       if (counts > 0) this.counting();
     }, 1000);
+  }
+
+  stopCounting() {
+    clearTimeout(this.timer);
   }
 
   render(context) {
