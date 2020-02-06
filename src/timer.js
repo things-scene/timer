@@ -85,7 +85,7 @@ export default class Timer extends ValueHolder(RectPath(Shape)) {
     this.timer = setTimeout(() => {
       this.counts--;
       this.set("data", this.counts * 1000);
-      if (counts > 0) this.counting();
+      if (this.counts > 0) this.counting();
     }, 1000);
   }
 
