@@ -12,7 +12,11 @@ export default {
     top: 10,
     width: 100,
     height: 100,
-    fillStyle: 'cyan',
-    strokeStyle: 'darkgray'
+    strokeStyle: 'darkgray',
+    text: '#{data}',
+    days: 0,
+    hours: 0,
+    minutes: 0,
+    seconds: 0
   }
 };
