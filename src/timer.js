@@ -65,7 +65,7 @@ export default class Timer extends ValueHolder(RectPath(Shape)) {
     );
     this.set("data", this.counts * 1000);
 
-    this.counting();
+    if (this.counts) this.counting();
   }
 
   onchange(after) {
