@@ -71,7 +71,8 @@ export default class Timer extends ValueHolder(RectPath(Shape)) {
   onchange(after) {
     if ("value" in after) {
       this.stopCounting();
-      this.counts = Number(after.value) || 0;
+      var milli = Number(after.value)
+      this.counts = milli > 0 ? Math.floor(milli / 1000) : 0 
       this.counting();
     }
   }
