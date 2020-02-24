@@ -1,7 +1,7 @@
 /*
  * Copyright © HatioLab Inc. All rights reserved.
  */
-import format from './libs/format'
+import format from "./libs/format";
 
 const NATURE = {
   mutable: false,
@@ -34,9 +34,15 @@ const NATURE = {
     },
     {
       type: "string",
-      label: "format",
-      name: "format",
-      placeholder: "HH:mm:ss"
+      label: "format-run",
+      name: "format-run",
+      placeholder: "hh:mm:ss"
+    },
+    {
+      type: "string",
+      label: "format-stop",
+      name: "format-stop",
+      placeholder: "--:--:--"
     }
   ]
 };
@@ -72,7 +78,7 @@ export default class Timer extends ValueHolder(RectPath(Shape)) {
     );
     this.set(
       "data",
-      format(new Date(this.counts * 1000), this.getState("format") || "", true)
+      format(this.counts * 1000, this.getState("format-run"))
     );
 
     if (this.counts) this.counting();
@@ -81,8 +87,8 @@ export default class Timer extends ValueHolder(RectPath(Shape)) {
   onchange(after) {
     if ("value" in after) {
       this.stopCounting();
-      var milli = Number(after.value)
-      this.counts = milli > 0 ? Math.floor(milli / 1000) : 0 
+      var milli = Number(after.value);
+      this.counts = milli > 0 ? Math.floor(milli / 1000) : 0;
       this.counting();
     }
   }
@@ -92,11 +98,15 @@ export default class Timer extends ValueHolder(RectPath(Shape)) {
   }
 
   counting() {
-    this.stopCounting()
+    this.stopCounting();
     this.timer = setTimeout(() => {
       this.counts--;
-      this.set("data", format(new Date(this.counts * 1000), this.getState('format') || '', true));
+      this.set(
+        "data",
+        format(this.counts * 1000, this.getState("format-run"))
+      );
       if (this.counts > 0) this.counting();
+      else this.set("data", this.getState("format-stop"));
     }, 1000);
   }
 
