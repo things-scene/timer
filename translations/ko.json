@@ -1,3 +1,8 @@
 {
-  "keyword": "키워드"
+  "keyword": "키워드",
+  "label.days": "일수",
+  "label.hours": "시간",
+  "label.minutes": "분",
+  "label.seconds": "초",
+  "label.format": "포맷"
 }

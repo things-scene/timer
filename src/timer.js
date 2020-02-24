@@ -1,6 +1,7 @@
 /*
  * Copyright © HatioLab Inc. All rights reserved.
  */
+import format from './libs/format'
 
 const NATURE = {
   mutable: false,
@@ -30,6 +31,12 @@ const NATURE = {
       label: "seconds",
       name: "seconds",
       placeholder: "seconds"
+    },
+    {
+      type: "string",
+      label: "format",
+      name: "format",
+      placeholder: "HH:mm:ss"
     }
   ]
 };
@@ -63,7 +70,10 @@ export default class Timer extends ValueHolder(RectPath(Shape)) {
       minutes || 0,
       seconds || 0
     );
-    this.set("data", this.counts * 1000);
+    this.set(
+      "data",
+      format(new Date(this.counts * 1000), this.getState("format") || "", true)
+    );
 
     if (this.counts) this.counting();
   }
@@ -85,7 +95,7 @@ export default class Timer extends ValueHolder(RectPath(Shape)) {
     this.stopCounting()
     this.timer = setTimeout(() => {
       this.counts--;
-      this.set("data", this.counts * 1000);
+      this.set("data", format(new Date(this.counts * 1000), this.getState('format') || '', true));
       if (this.counts > 0) this.counting();
     }, 1000);
   }

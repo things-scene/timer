@@ -1,3 +1,8 @@
 {
-  "keyword": "keyword"
+  "keyword": "keyword",
+  "label.days": "days",
+  "label.hours": "hours",
+  "label.minutes": "minutes",
+  "label.seconds": "seconds",
+  "label.format": "format"
 }
