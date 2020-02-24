@@ -4,5 +4,6 @@
   "label.hours": "hours",
   "label.minutes": "minutes",
   "label.seconds": "seconds",
-  "label.format": "format"
+  "label.format-run": "time format",
+  "label.format-stop": "stopped"
 }

@@ -4,5 +4,6 @@
   "label.hours": "시간",
   "label.minutes": "분",
   "label.seconds": "초",
-  "label.format": "포맷"
+  "label.format-run": "포맷",
+  "label.format-stop": "멈춤"
 }
